@@ -10,7 +10,7 @@ REMIND DIARY
 각자 쓴 코드를 해당되는 디렉토리 안에 넣으면 됨.
 
 
-#### calendar
+#### 1. calendar
 날짜별 모아보기
 피그마에서 4번 화면 넣을 디렉토리
 
@@ -44,7 +44,7 @@ REMIND DIARY
 로그인 화면을 따로 구현 완료하면 수정할 예정.
 무시해도됨.
 
-# navigation_home_screen.dart
+#### navigation_home_screen.dart
 햄버거 메뉴창.
 무시해도됨.
 
