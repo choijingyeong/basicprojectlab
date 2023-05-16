@@ -73,7 +73,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         case DrawerIndex.Feelings:
           setState(() {
             // screenView = FeedbackScreen();
-            screenView = const Feelings();
+            screenView = Feelings();
           });
           break;
       // 태그별 모아보기 (피그마에서 5번 페이지)

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../app_theme.dart';
+import '../write_diary/write_diary.dart';
 import 'after_search.dart';
 
 class Tags extends StatefulWidget {
@@ -38,7 +39,8 @@ class _TagsState extends State<Tags> with TickerProviderStateMixin {
               InkWell(
                 key: ValueKey('Sign Up button'),
                 onTap: () {
-                  Navigator.push(context,MaterialPageRoute(builder: (context) => AfterSearch()));
+                  // Navigator.push(context,MaterialPageRoute(builder: (context) => AfterSearch()));
+                  Navigator.push(context,MaterialPageRoute(builder: (context) => WriteDiary()));
                 },
                 child: const Padding(
                   padding: EdgeInsets.only(top:10, bottom:10, left: 16.0, right: 16.0),

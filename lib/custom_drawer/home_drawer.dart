@@ -50,7 +50,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
       ),
       DrawerList(
         index: DrawerIndex.User,
-        labelName: 'Rate the app',
+        labelName: '나의 감정그래프',
         icon: Icon(Icons.share),
       ),
       DrawerList(
