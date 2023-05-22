@@ -12,22 +12,22 @@ class WriteDiary extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ThroughClass(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class ThroughClass extends StatefulWidget {
-  const ThroughClass({super.key, required this.title});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
 
   final String title;
 
   @override
-  State createState() => _WriteDiary();
+  State createState() => _uploadNewPost();
 }
 
 
-class _WriteDiary extends State {
+class _uploadNewPost extends State {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,11 +52,8 @@ class _WriteDiary extends State {
                         ),
                         Positioned(
                             top: 50,
-                            child: Text(
-                              "사진 업로드 문제있음. 추후 수정 예정",
-                              style: TextStyle(
-                                fontSize: 10,
-                              ),
+                            child: Image(
+                                image: AssetImage('images/user.png')
                             )
                         ),
                       ],
