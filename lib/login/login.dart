@@ -144,7 +144,7 @@ class RegisterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/login');
+          Navigator.of(context).pushNamed('/register');
         },
         child: Text(
           'Regist by email',

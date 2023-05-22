@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'login/login.dart';
 import 'login/model_auth.dart';
+import 'login/register.dart';
 import 'logo.dart';
 import 'navigation_home_screen.dart';
 
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
           '/home': (context) => NavigationHomeScreen(),
           '/login': (context) => LoginPage(),
           '/splash': (context) => SplashScreen(),
+          '/register': (context) => RegisterPage(),
         },
         // theme: ThemeData(
         //   primaryColor: Colors.white,
