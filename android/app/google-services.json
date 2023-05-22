@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "195814278870",
+    "project_id": "remind-diary-e6b0b",
+    "storage_bucket": "remind-diary-e6b0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195814278870:android:9bd4cb8972bc805c25eb77",
+        "android_client_info": {
+          "package_name": "com.example.reminddiary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "195814278870-b7058f1d7ebdpvdka0so3pa0gn8v8mn5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe_v22TpJPfzY-AJouuIDt71E88z7iG0M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "195814278870-b7058f1d7ebdpvdka0so3pa0gn8v8mn5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

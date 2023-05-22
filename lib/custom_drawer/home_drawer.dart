@@ -1,5 +1,9 @@
+import 'package:provider/provider.dart';
+
 import '../app_theme.dart';
 import 'package:flutter/material.dart';
+
+import '../login/model_auth.dart';
 
 class HomeDrawer extends StatefulWidget {
   const HomeDrawer(
@@ -40,17 +44,17 @@ class _HomeDrawerState extends State<HomeDrawer> {
       DrawerList(
         index: DrawerIndex.Feelings,
         labelName: '감정 목록',
-        icon: Icon(Icons.help),
+        icon: Icon(Icons.sentiment_satisfied),
       ),
       DrawerList(
         index: DrawerIndex.Tags,
         labelName: '태그 목록',
-        icon: Icon(Icons.group),
+        icon: Icon(Icons.label),
       ),
       DrawerList(
         index: DrawerIndex.User,
         labelName: '나의 감정그래프',
-        icon: Icon(Icons.share),
+        icon: Icon(Icons.insights),
       ),
       DrawerList(
         index: DrawerIndex.About,
@@ -62,6 +66,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    final authClient =  Provider.of<FirebaseAuthProvider>(context, listen: false);
+
     var brightness = MediaQuery.of(context).platformBrightness;
     bool isLightMode = brightness == Brightness.light;
     return Scaffold(
@@ -168,8 +174,12 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   Icons.power_settings_new,
                   color: Colors.red,
                 ),
-                onTap: () {
-                  onTapped();
+                onTap: () async {
+                  await authClient.logout();
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(SnackBar(content: Text('logout!')));
+                  Navigator.of(context).pushReplacementNamed('/login');
                 },
               ),
               SizedBox(
@@ -180,10 +190,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
         ],
       ),
     );
-  }
-
-  void onTapped() {
-    print('Doing Something...'); // Print to console.
   }
 
   Widget inkwell(DrawerList listData) {

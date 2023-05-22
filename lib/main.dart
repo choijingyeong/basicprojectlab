@@ -1,11 +1,23 @@
+import 'package:provider/provider.dart';
+
 import 'app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'login/login.dart';
+import 'login/model_auth.dart';
+import 'logo.dart';
 import 'navigation_home_screen.dart';
 
 void main() async {
-  // 화면 세로모드로 강제 고정
+  // WidgetsFlutterBinding.ensureInitialized()는 runApp으로 앱이 실행되기 전에 비동기로 지연이 되더라도 오류가 발생하지 않도록 하는 역할을 한다.
   WidgetsFlutterBinding.ensureInitialized();
+  // Firebase.initializeApp()은 앱을 실행할 때 Firebase를 비동기 방식으로 초기화하도록 한다.
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // 화면 세로모드로 강제 고정
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
@@ -15,15 +27,25 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'REMIND DIARY',
-      debugShowCheckedModeBanner: false,
-      // theme: ThemeData(
-      //   primaryColor: Colors.white,
-      //   textTheme: AppTheme.textTheme,
-      //   platform: TargetPlatform.iOS,
-      // ),
-      home: NavigationHomeScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => FirebaseAuthProvider()),
+      ],
+      child: MaterialApp(
+        title: 'REMIND DIARY',
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/home': (context) => NavigationHomeScreen(),
+          '/login': (context) => LoginPage(),
+          '/splash': (context) => SplashScreen(),
+        },
+        // theme: ThemeData(
+        //   primaryColor: Colors.white,
+        //   textTheme: AppTheme.textTheme,
+        //   platform: TargetPlatform.iOS,
+        // ),
+        initialRoute: '/splash'
+      ),
     );
   }
 }

@@ -36,7 +36,13 @@ dependencies:
   carousel_slider: ^4.2.1
   fl_chart: ^0.62.0
   table_calendar: ^3.0.9
-  flutter_native_splash: ^2.3.0
+#  flutter_native_splash: ^2.3.0
+  firebase_core: ^2.13.0
+  firebase_auth: ^4.6.1
+  cloud_firestore: ^4.7.1
+  get: ^4.6.5
+  shared_preferences: ^2.1.1
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
@@ -50,11 +56,11 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 # https://mdpapa.tistory.com/133
-flutter_native_splash:
-  color: "#ffffff"
-  color_dark: "#ffffff"
-  image: assets/images/logo.png
-  fullscreen: true
+#flutter_native_splash:
+#  color: "#ffffff"
+#  color_dark: "#ffffff"
+#  image: assets/images/logo.png
+#  fullscreen: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
