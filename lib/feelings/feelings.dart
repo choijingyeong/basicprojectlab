@@ -1,79 +1,120 @@
 import 'package:flutter/material.dart';
 
-class Feelings extends StatelessWidget {
+import '../app_theme.dart';
+
+class Feelings extends StatefulWidget {
+  const Feelings({Key? key}) : super(key: key);
+
+  @override
+  _FeelingsState createState() => _FeelingsState();
+}
+
+class _FeelingsState extends State<Feelings> with TickerProviderStateMixin {
+  bool multiple = true;
+  AnimationController? animationController;
+
+  @override
+  void initState() {
+    animationController = AnimationController(
+        duration: const Duration(milliseconds: 2000), vsync: this);
+    super.initState();
+  }
+
+  Future<bool> getData() async {
+    await Future<dynamic>.delayed(const Duration(milliseconds: 0));
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(0, 255, 255, 255),
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            // Perform action when back button is pressed
-          },
-          color: Colors.black,
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              // Perform action when menu button is pressed
+    return Padding(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          appBar(),
+          Expanded(
+            child: ListView.builder(
+            itemCount: categoryList.length,
+            itemBuilder: (BuildContext context, int index) {
+              final category = categoryList[index];
+              return GestureDetector(
+                onTap: () {
+                  print('selected');
+                },
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(8.0, 30.0, 8.0, 8.0),
+                      width: 350,
+                      padding: EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent, // 투명한 배경색
+                        border: Border.all(color: category.color),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              category.name,
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: 50.0,
+                      height: 50.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: category.color,
+                      ),
+                    )
+                  ],
+                ),
+              );
             },
-            color: Colors.black,
+          ),
+          )
+    ]));
+  }
+
+  Widget appBar() {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isLightMode = brightness == Brightness.light;
+    return SizedBox(
+      height: AppBar().preferredSize.height,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 8, left: 8),
+            child: Container(
+              width: AppBar().preferredSize.height - 8,
+              height: AppBar().preferredSize.height - 8,
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+              child: Text(
+                'Remind Diary',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: isLightMode ? AppTheme.darkText : AppTheme.white,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
           ),
         ],
-      ),
-      body: ListView.builder(
-        itemCount: categoryList.length,
-        itemBuilder: (BuildContext context, int index) {
-          final category = categoryList[index];
-          return GestureDetector(
-            onTap: () {
-              print('selected');
-            },
-            child: Stack(
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(8.0, 30.0, 8.0, 8.0),
-                  width: 350,
-                  padding: EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    color: Colors.transparent, // 투명한 배경색
-                    border: Border.all(color: category.color),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          category.name,
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 0, 0, 0),
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  top: 20.0,
-                  right: 37.0,
-                  child: Container(
-                    width: 50.0,
-                    height: 50.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: category.color,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
       ),
     );
   }

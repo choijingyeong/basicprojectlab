@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fl_chart/fl_chart.dart';
 
+import '../app_theme.dart';
+
 final images = [
   'assets/images/milky.jpg',
   'assets/images/mont.jpg',
@@ -9,8 +11,28 @@ final images = [
   'assets/images/woman.jpg',
 ];
 
-class UserPage extends StatelessWidget {
+class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
+
+  @override
+  _UserPageState createState() => _UserPageState();
+}
+
+class _UserPageState extends State<UserPage> with TickerProviderStateMixin {
+  bool multiple = true;
+  AnimationController? animationController;
+
+  @override
+  void initState() {
+    animationController = AnimationController(
+        duration: const Duration(milliseconds: 2000), vsync: this);
+    super.initState();
+  }
+
+  Future<bool> getData() async {
+    await Future<dynamic>.delayed(const Duration(milliseconds: 0));
+    return true;
+  }
 
   SideTitles get _bottom => SideTitles(
       showTitles: true,
@@ -20,27 +42,18 @@ class UserPage extends StatelessWidget {
         String text = '${value.toInt()}일';
         return Text(text);
       }
-
   );
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-            elevation: 1.0,
-            title: Text('RemindDiary', style: TextStyle(color: Colors.black),),
-            backgroundColor: Colors.white,
-            actions: [
-              IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () {  },
-                color: Colors.black,
-              ),
-            ]
-        ),
-        body: Column(
+    return Padding(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+        appBar(),
+        Column(
           children: [
             Container(
               margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -79,14 +92,14 @@ class UserPage extends StatelessWidget {
                     maxY: 100,
                     lineBarsData: [
                       LineChartBarData(
-                          spots: [
-                            FlSpot(14,30),
-                            FlSpot(15,40),
-                            FlSpot(16,90),
-                            FlSpot(17,50),
-                            FlSpot(18, 20),
-                            FlSpot(19, 40),
-                          ]
+                        spots: [
+                          FlSpot(14,30),
+                          FlSpot(15,40),
+                          FlSpot(16,90),
+                          FlSpot(17,50),
+                          FlSpot(18, 20),
+                          FlSpot(19, 40),
+                        ]
                       )
                     ]
                 ),
@@ -168,8 +181,41 @@ class UserPage extends StatelessWidget {
               child: Text("동학사에 가서 꽃구경을 했다.", style: TextStyle(color: Colors.black, fontSize: 16,)),
               margin: EdgeInsets.fromLTRB(100, 15, 100, 40),
             ),
-          ], // childeren
+          ], // children
         ),
+      ]),
+    );
+  }
+
+  Widget appBar() {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isLightMode = brightness == Brightness.light;
+    return SizedBox(
+      height: AppBar().preferredSize.height,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 8, left: 8),
+            child: Container(
+              width: AppBar().preferredSize.height - 8,
+              height: AppBar().preferredSize.height - 8,
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+              child: Text(
+                'Remind Diary',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: isLightMode ? AppTheme.darkText : AppTheme.white,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -35,8 +35,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
       DrawerList(
         index: DrawerIndex.Calendar,
         labelName: '캘린더',
-        isAssetsImage: true,
-        imageName: 'assets/images/supportIcon.png',
+        icon: Icon(Icons.calendar_today),
       ),
       DrawerList(
         index: DrawerIndex.Feelings,

@@ -30,73 +30,73 @@ class _TagsState extends State<Tags> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Padding(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              appBar(),
-              InkWell(
-                key: ValueKey('Sign Up button'),
-                onTap: () {
-                  // Navigator.push(context,MaterialPageRoute(builder: (context) => AfterSearch()));
-                  Navigator.push(context,MaterialPageRoute(builder: (context) => WriteDiary()));
-                },
-                child: const Padding(
-                  padding: EdgeInsets.only(top:10, bottom:10, left: 16.0, right: 16.0),
-                  child: Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '검색하러가기',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Icon(Icons.arrow_forward_rounded,
-                          color: Colors.black),
-                    ],
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          appBar(),
+          InkWell(
+            key: ValueKey('Sign Up button'),
+            onTap: () {
+              // Navigator.push(context,MaterialPageRoute(builder: (context) => AfterSearch()));
+              Navigator.push(context,MaterialPageRoute(builder: (context) => WriteDiary()));
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(top:10, bottom:10, left: 16.0, right: 16.0),
+              child: Row(
+                mainAxisAlignment:
+                MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '검색하러가기',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
+                  Icon(Icons.arrow_forward_rounded,
+                      color: Colors.black),
+                ],
               ),
-              Expanded(
-                child: FutureBuilder<bool>(
-                  future: getData(),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                    if (!snapshot.hasData) {
-                      return const SizedBox();
-                    } else {
-                      return Wrap(
-                        spacing : 8.0,
-                        runSpacing: 4.0,
-                        children: [
-                          '여행',
-                          '대학교친구들',
-                          '고등학교친구들',
-                          '여름',
-                          '기초프로젝트랩'
-                        ]
-                            .map(
-                                (String name) => Chip(
-                              avatar: CircleAvatar(child : Text("#")),
-                              label : Text(name),
-                              deleteIcon: Icon(Icons.delete),
-                              onDeleted: null
-                            )
-                        )
-                            .toList(),
-                      );
-                    }
-                  },
-                ),
-              ),
-            ],
+            ),
           ),
-        );
+          Expanded(
+            child: FutureBuilder<bool>(
+              future: getData(),
+              builder:
+                  (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                if (!snapshot.hasData) {
+                  return const SizedBox();
+                } else {
+                  return Wrap(
+                    spacing : 8.0,
+                    runSpacing: 4.0,
+                    children: [
+                      '여행',
+                      '대학교친구들',
+                      '고등학교친구들',
+                      '여름',
+                      '기초프로젝트랩'
+                    ]
+                        .map(
+                            (String name) => Chip(
+                          avatar: CircleAvatar(child : Text("#")),
+                          label : Text(name),
+                          deleteIcon: Icon(Icons.delete),
+                          onDeleted: null
+                        )
+                    )
+                        .toList(),
+                  );
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget appBar() {
