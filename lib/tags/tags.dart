@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../app_theme.dart';
+import '../diary/diary.dart';
 import '../write_diary/write_diary.dart';
 import 'after_search.dart';
 
