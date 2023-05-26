@@ -1,23 +1,24 @@
 import 'package:reminddiary/tags/tags.dart';
 import 'package:reminddiary/userpage/user_page.dart';
 
-import 'app_theme.dart';
-import 'calendar/calendar.dart';
-import 'custom_drawer/drawer_user_controller.dart';
-import 'custom_drawer/home_drawer.dart';
-import 'feelings/feelings.dart';
-import 'homepage/home_page.dart';
+import '../app_theme.dart';
+import '../calendar/calendar.dart';
+import '../custom_drawer/drawer_user_controller.dart';
+import '../custom_drawer/home_drawer.dart';
+import '../feelings/feelings.dart';
+import '../homepage/home_page.dart';
+import 'diary.dart';
 import 'package:flutter/material.dart';
 
-// 햄버거 메뉴 클릭 시 나옴
-class NavigationHomeScreen extends StatefulWidget {
-  const NavigationHomeScreen({super.key});
+
+class DiaryNavigation extends StatefulWidget {
+  const DiaryNavigation({super.key});
 
   @override
-  _NavigationHomeScreenState createState() => _NavigationHomeScreenState();
+  _DiaryNavigationState createState() => _DiaryNavigationState();
 }
 
-class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
+class _DiaryNavigationState extends State<DiaryNavigation> {
   // 변수명 뒤에 ?이 붙은것은 null이 될 수 있다는 의미
   Widget? screenView;
   DrawerIndex? drawerIndex;
@@ -25,8 +26,8 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
   // 이 위젯이 로드될때 필요한 초기화를 진행함.
   @override
   void initState() {
-    drawerIndex = DrawerIndex.HOME;
-    screenView = const MyHomePage();
+    drawerIndex = DrawerIndex.Testing;
+    screenView = const Diary();
     super.initState();
   }
 

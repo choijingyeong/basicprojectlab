@@ -59,7 +59,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
       DrawerList(
         index: DrawerIndex.About,
         labelName: 'About Us',
-        icon: Icon(Icons.info),
+        icon: Icon(Icons.info)
       ),
     ];
   }

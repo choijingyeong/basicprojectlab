@@ -37,8 +37,13 @@ class MyApp extends StatelessWidget {
         title: 'REMIND DIARY',
         debugShowCheckedModeBanner: false,
         routes: {
+<<<<<<< HEAD
           '/home': (context) => NavigationHomeScreen(),
           '/login': (context) => WriteDiary(),
+=======
+          '/home': (context) => const NavigationHomeScreen(),
+          '/login': (context) => LoginPage(),
+>>>>>>> upstream/master
           '/splash': (context) => SplashScreen(),
           '/register': (context) => RegisterPage(),
         },
