@@ -1,4 +1,5 @@
 import 'package:provider/provider.dart';
+import 'package:reminddiary/write_diary/write_diary.dart';
 
 import 'app_theme.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: {
           '/home': (context) => NavigationHomeScreen(),
-          '/login': (context) => LoginPage(),
+          '/login': (context) => WriteDiary(),
           '/splash': (context) => SplashScreen(),
           '/register': (context) => RegisterPage(),
         },
