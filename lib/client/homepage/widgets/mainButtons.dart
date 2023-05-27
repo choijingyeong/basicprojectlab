@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../write_diary/write_diary.dart';
+
 class mainButton extends StatefulWidget {
   State<StatefulWidget> createState() => _mainButton();
 }
@@ -185,7 +187,9 @@ class _mainButton extends State{
               )
           ),
           TextButton(
-              onPressed: () {}, //////////////////////////////글쓰기버튼/////////////////////////////////
+              onPressed: () {
+                Navigator.push(context,MaterialPageRoute(builder: (context) => WriteDiary()));
+              },
               child: Container(
                 margin: EdgeInsets.only(top: 25),
                 width: 200,

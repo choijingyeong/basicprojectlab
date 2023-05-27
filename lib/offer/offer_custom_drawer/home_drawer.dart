@@ -32,35 +32,20 @@ class _HomeDrawerState extends State<HomeDrawer> {
   void setDrawerListArray() {
     drawerList = <DrawerList>[
       DrawerList(
-        index: DrawerIndex.HOME,
-        labelName: 'Home',
-        icon: Icon(Icons.home),
+        index: DrawerIndex.Clientlist,
+        labelName: '내담자 리스트',
+        icon: Icon(Icons.list),
       ),
       DrawerList(
-        index: DrawerIndex.Calendar,
-        labelName: '캘린더',
-        icon: Icon(Icons.calendar_today),
+        index: DrawerIndex.Clientrequest,
+        labelName: '내담자 요청 목록',
+        icon: Icon(Icons.search),
       ),
       DrawerList(
-        index: DrawerIndex.Feelings,
-        labelName: '감정 목록',
-        icon: Icon(Icons.sentiment_satisfied),
-      ),
-      DrawerList(
-        index: DrawerIndex.Tags,
-        labelName: '태그 목록',
-        icon: Icon(Icons.label),
-      ),
-      DrawerList(
-        index: DrawerIndex.User,
-        labelName: '나의 감정그래프',
-        icon: Icon(Icons.insights),
-      ),
-      DrawerList(
-        index: DrawerIndex.About,
-        labelName: 'About Us',
-        icon: Icon(Icons.info)
-      ),
+        index: DrawerIndex.Findclient,
+        labelName: '내담자 등록하기',
+        icon: Icon(Icons.add),
+      )
     ];
   }
 
@@ -124,7 +109,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   Padding(
                     padding: const EdgeInsets.only(top: 8, left: 4),
                     child: Text(
-                      'Jingyeong Choi',
+                      'Yunsu Gang',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: isLightMode ? AppTheme.grey : AppTheme.white,
@@ -300,13 +285,10 @@ class _HomeDrawerState extends State<HomeDrawer> {
 }
 
 enum DrawerIndex {
-  HOME,
-  Calendar,
-  Feelings,
-  Tags,
-  User,
-  About,
-  Testing,
+  Clientlist,
+  Clientrequest,
+  Findclient,
+  Offeruserpage
 }
 
 class DrawerList {

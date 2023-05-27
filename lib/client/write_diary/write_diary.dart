@@ -1,7 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../module_diary.dart';
 
 final images = [
   'images/movie1.png',
@@ -9,26 +12,8 @@ final images = [
   'images/movie3.png',
 ];
 
-class WriteDiary extends StatelessWidget {
+class WriteDiary extends StatefulWidget {
   const WriteDiary({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
 
   @override
   State createState() => _uploadNewPost();
@@ -38,19 +23,27 @@ class staticVariables extends ChangeNotifier {
   List<Widget> _tagList = [];
 
   void addText(String txt) {
-    _tagList.add(Container(
-      padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
-      margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          color: Colors.grey),
-      child: Text(
-        "#" + txt,
-        style: TextStyle(fontSize: 10, color: Colors.white),
-      ),
-    ));
+    _tagList.add(
+        Container(
+          padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
+          margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(
+                  5)),
+              color: Colors.grey
+          ),
+          child: Text(
+            "#"+txt,
+            style: TextStyle(
+                fontSize: 10,
+                color: Colors.white
+            ),
+          ),
+        )
+    );
   }
 }
+
 
 class _uploadNewPost extends State {
   final tagText = TextEditingController();
@@ -59,11 +52,16 @@ class _uploadNewPost extends State {
       padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
       margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
       decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          color: Colors.grey),
+          borderRadius: BorderRadius.all(Radius.circular(
+              5)),
+          color: Colors.grey
+      ),
       child: const Text(
         '#성년의 날',
-        style: TextStyle(fontSize: 10, color: Colors.white),
+        style: TextStyle(
+            fontSize: 10,
+            color: Colors.white
+        ),
       ),
     ),
     Container(
@@ -71,13 +69,26 @@ class _uploadNewPost extends State {
       margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),
-          color: Colors.grey),
+          color: Colors.grey
+      ),
       child: Text(
         "#영화제",
-        style: const TextStyle(fontSize: 10, color: Colors.white),
+        style: const TextStyle(
+            fontSize: 10,
+            color: Colors.white
+        ),
       ),
     )
   ];
+
+  String? getEmail(){
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final email = user.email;
+      return email;
+    }
+    return "";
+  }
 
   void addTag() {
     showDialog(
@@ -88,7 +99,10 @@ class _uploadNewPost extends State {
             ),
             title: Text(
               "태그 추가하기",
-              style: TextStyle(fontSize: 15, color: Colors.black),
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black
+              ),
             ),
             actions: [
               TextButton(
@@ -97,7 +111,10 @@ class _uploadNewPost extends State {
                 },
                 child: Text(
                   "추가",
-                  style: TextStyle(fontSize: 15, color: Colors.black),
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black
+                  ),
                 ),
               ),
               TextButton(
@@ -106,7 +123,10 @@ class _uploadNewPost extends State {
                   },
                   child: Text(
                     "닫기",
-                    style: TextStyle(fontSize: 15, color: Colors.black),
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black
+                    ),
                   ))
             ],
             content: TextField(
@@ -114,17 +134,14 @@ class _uploadNewPost extends State {
             ),
           );
         },
-        context: this.context);
+        context: this.context
+    );
   }
 
+  List<String> tags = ["성년의 날", "영화제"];
+  String emotion = "";
   int emotionIndex = 0;
-  List emotionArr = [
-    Colors.red,
-    Colors.orange,
-    Colors.yellow,
-    Colors.lightGreenAccent,
-    Colors.lightBlueAccent
-  ];
+  List emotionArr = [Colors.red, Colors.orange, Colors.yellow, Colors.lightGreenAccent, Colors.lightBlueAccent];
   Container emotionCircle = Container(
     width: 200,
     height: 200,
@@ -134,7 +151,6 @@ class _uploadNewPost extends State {
       color: Colors.amberAccent,
     ),
   );
-
   void selectEmotion() {
     showDialog(
         builder: (BuildContext context) {
@@ -144,7 +160,10 @@ class _uploadNewPost extends State {
               ),
               title: Text(
                 "감정 변경하기",
-                style: TextStyle(fontSize: 15, color: Colors.black),
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black
+                ),
               ),
               actions: [
                 TextButton(
@@ -153,7 +172,10 @@ class _uploadNewPost extends State {
                   },
                   child: Text(
                     "적용",
-                    style: TextStyle(fontSize: 15, color: Colors.black),
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black
+                    ),
                   ),
                 ),
                 TextButton(
@@ -162,7 +184,10 @@ class _uploadNewPost extends State {
                     },
                     child: Text(
                       "닫기",
-                      style: TextStyle(fontSize: 15, color: Colors.black),
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black
+                      ),
                     ))
               ],
               content: Row(
@@ -170,154 +195,190 @@ class _uploadNewPost extends State {
                   TextButton(
                       onPressed: () {
                         emotionIndex = 0;
-                        print(emotionIndex);
+                        emotion = "화남";
                       },
                       child: Text(
                         "화남",
-                      )),
+                      )
+                  ),
                   TextButton(
                       onPressed: () {
                         emotionIndex = 1;
-                        print(emotionIndex);
+                        emotion = "신남";
                       },
                       child: Text(
                         "신남",
-                      )),
+                      )
+                  ),
                   TextButton(
                       onPressed: () {
                         emotionIndex = 2;
+                        emotion = "기쁨";
                       },
                       child: Text(
                         "기쁨",
-                      )),
+                      )
+                  ),
                   TextButton(
                       onPressed: () {
+                        emotion = "즐거움";
                         emotionIndex = 3;
                       },
                       child: Text(
                         "즐거움",
-                      )),
+                      )
+                  ),
                   TextButton(
                       onPressed: () {
+                        emotion = "슬픔";
                         emotionIndex = 4;
                       },
                       child: Text(
                         "슬픔",
-                      )),
+                      )
+                  ),
                 ],
-              ));
+              )
+          );
         },
-        context: this.context);
+        context: this.context
+    );
   }
+
+  TextEditingController _writediarycontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-        height: 300,
-        child: Column(
-          children: <Widget>[
-            Expanded(
-                flex: 5,
-                child: Column(
-                  children: [
-                    Stack(
+    return Scaffold(
+        body : Container(
+            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            height: 300,
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                    flex: 5,
+                    child: Column(
                       children: [
-                        emotionCircle,
-                        Container(
-                            child: CarouselSlider(
-                          options: CarouselOptions(
-                            height: 250.0,
-                          ),
-                          items: images.map((i) {
-                            return Builder(
-                              builder: (BuildContext context) {
-                                return Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.fromLTRB(10, 40, 10, 0),
-                                  decoration: BoxDecoration(boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black26,
-                                      blurRadius: 10.0,
-                                      spreadRadius: 2.0,
-                                    )
-                                  ]),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    child: Image.asset(
-                                      i,
-                                      fit: BoxFit.cover,
-                                    ),
+                        Stack(
+                          children: [
+                            emotionCircle,
+                            Container(
+                                child: CarouselSlider(
+                                  options: CarouselOptions(
+                                    height: 250.0,
                                   ),
-                                );
-                              },
-                            );
-                          }).toList(),
-                        )),
+                                  items: images.map((i) {
+                                    return Builder(
+                                      builder: (BuildContext context) {
+                                        return Container(
+                                          width: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .width,
+                                          margin: EdgeInsets.fromLTRB(
+                                              10, 40, 10, 0),
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  blurRadius: 10.0,
+                                                  spreadRadius: 2.0,
+                                                )
+                                              ]
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                                10.0),
+                                            child: Image.asset(
+                                              i,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  }).toList(),
+                                )
+                            ),
+                          ],
+                        ),
+                        Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: tagList,
+                            )
+                        )
                       ],
-                    ),
-                    Container(
-                        child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: tagList,
-                    ))
-                  ],
-                )),
-            Expanded(
-                flex: 5,
-                child: Column(
-                  children: [
-                    Expanded(
-                        flex: 7,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "오늘은 영화제에서 영화제를 봤다",
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.black),
-                            ),
-                            Text(
-                              "어바웃 타임은 처음 봤는데 재밌었다.",
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.black),
-                            )
-                          ],
-                        )),
-                    Expanded(
-                        flex: 3,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            TextButton(
-                                onPressed: () {
-                                  addTag();
-                                },
-                                child: Text(
-                                  "태그추가",
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.black),
-                                )),
-                            TextButton(
-                              onPressed: () {
-                                selectEmotion();
-                              },
-                              child: Text(
-                                "감정변경",
-                                style: TextStyle(
-                                    fontSize: 15, color: Colors.black),
+                    )
+                ),
+                Expanded(
+                    flex: 5,
+                    child: Column(
+                      children: [
+                        Expanded(
+                            flex: 7,
+                            child: TextField(
+                              controller: _writediarycontroller,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.black
                               ),
-                            ),
-                            Text(
-                              "저장",
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.black),
                             )
-                          ],
-                        ))
-                  ],
-                ))
-          ],
-        ));
+                        ),
+                        Expanded(
+                            flex: 3,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                TextButton(
+                                    onPressed: () {
+                                      addTag();
+                                    },
+                                    child: Text(
+                                      "태그추가",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.black
+                                      ),
+                                    )
+                                ),
+                                TextButton(
+                                  onPressed: () { selectEmotion(); },
+                                  child: Text(
+                                    "감정변경",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.black
+                                    ),
+                                  ),),
+                                TextButton(
+                                  onPressed: () => _addDiary(Diary(_writediarycontroller.text, tags, emotion)),
+                                  child: Text(
+                                    "저장",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.black
+                                    ),
+                                  ),),
+                              ],
+
+                            )
+                        )
+                      ],
+                    )
+                )
+              ],
+            )
+        )
+    );
+  }
+
+  void _addDiary(Diary diary) {
+    setState(() {
+      FirebaseFirestore.instance
+          .collection(getEmail()!)
+          .add({'contents': diary.contents, 'tags': diary.tags, 'feeling' : diary.feeling});
+      _writediarycontroller.text = "";
+    });
   }
 }
