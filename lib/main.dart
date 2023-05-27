@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => FirebaseAuthProvider()),
       ],
       child: MaterialApp(
-        title: 'REMIND DIARY',
+          title: 'REMIND DIARY',
         debugShowCheckedModeBanner: false,
         routes: {
           '/clienthome': (context) => const NavigationHomeScreen(),
