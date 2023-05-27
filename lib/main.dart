@@ -1,5 +1,4 @@
 import 'package:provider/provider.dart';
-import 'package:reminddiary/write_diary/write_diary.dart';
 
 import 'app_theme.dart';
 import 'package:flutter/material.dart';
@@ -34,25 +33,20 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => FirebaseAuthProvider()),
       ],
       child: MaterialApp(
-        title: 'REMIND DIARY',
-        debugShowCheckedModeBanner: false,
-        routes: {
-<<<<<<< HEAD
-          '/home': (context) => NavigationHomeScreen(),
-          '/login': (context) => WriteDiary(),
-=======
-          '/home': (context) => const NavigationHomeScreen(),
-          '/login': (context) => LoginPage(),
->>>>>>> upstream/master
-          '/splash': (context) => SplashScreen(),
-          '/register': (context) => RegisterPage(),
-        },
-        // theme: ThemeData(
-        //   primaryColor: Colors.white,
-        //   textTheme: AppTheme.textTheme,
-        //   platform: TargetPlatform.iOS,
-        // ),
-        initialRoute: '/splash'
+          title: 'REMIND DIARY',
+          debugShowCheckedModeBanner: false,
+          routes: {
+            '/home': (context) => const NavigationHomeScreen(),
+            '/login': (context) => LoginPage(),
+            '/splash': (context) => SplashScreen(),
+            '/register': (context) => RegisterPage(),
+          },
+          // theme: ThemeData(
+          //   primaryColor: Colors.white,
+          //   textTheme: AppTheme.textTheme,
+          //   platform: TargetPlatform.iOS,
+          // ),
+          initialRoute: '/splash'
       ),
     );
   }
