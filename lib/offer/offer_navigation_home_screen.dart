@@ -24,7 +24,7 @@ class _OfferNavigationHomeScreenState extends State<OfferNavigationHomeScreen> {
   // 이 위젯이 로드될때 필요한 초기화를 진행함.
   @override
   void initState() {
-    drawerIndex = DrawerIndex.HOME;
+    drawerIndex = DrawerIndex.Clientlist;
     screenView = const ClientList();
     super.initState();
   }
@@ -58,27 +58,27 @@ class _OfferNavigationHomeScreenState extends State<OfferNavigationHomeScreen> {
       drawerIndex = drawerIndexdata;
       switch (drawerIndex) {
       // 내담자 리스트
-        case DrawerIndex.HOME:
+        case DrawerIndex.Clientlist:
           setState(() {
             screenView = const ClientList();
           });
           break;
       // 내담자 요청 리스트
-        case DrawerIndex.Calendar:
+        case DrawerIndex.Clientrequest:
           setState(() {
             // screenView = HelpScreen();
             screenView = const ClientRequest();
           });
           break;
       // 내담자 찾기
-        case DrawerIndex.Feelings:
+        case DrawerIndex.Findclient:
           setState(() {
             // screenView = FeedbackScreen();
             screenView = FindClient();
           });
           break;
       // 마이페이지 (피그마에서 8번 페이지)
-        case DrawerIndex.User:
+        case DrawerIndex.Offeruserpage:
           setState(() {
             // screenView = InviteFriend();
             screenView = const OfferUserPage();

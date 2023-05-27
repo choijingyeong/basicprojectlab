@@ -3,14 +3,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../app_theme.dart';
 
-class Diary extends StatefulWidget {
-  const Diary({Key? key}) : super(key: key);
+class ViewDiary extends StatefulWidget {
+  const ViewDiary({Key? key}) : super(key: key);
 
   @override
-  _DiaryState createState() => _DiaryState();
+  _ViewDiaryState createState() => _ViewDiaryState();
 }
 
-class _DiaryState extends State<Diary> with TickerProviderStateMixin {
+class _ViewDiaryState extends State<ViewDiary> with TickerProviderStateMixin {
   List<Map<String, dynamic>> diaries = [
     {"id": 1, "title": "애니메이션", "imageUrl": "images/movie1.png"},
     {"id": 2, "title": "별 + 산", "imageUrl": "images/movie1.png"},

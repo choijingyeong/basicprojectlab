@@ -27,7 +27,7 @@ class _DiaryNavigationState extends State<DiaryNavigation> {
   @override
   void initState() {
     drawerIndex = DrawerIndex.Testing;
-    screenView = const Diary();
+    screenView = const ViewDiary();
     super.initState();
   }
 
