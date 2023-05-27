@@ -10,6 +10,7 @@ import 'login/model_auth.dart';
 import 'login/register.dart';
 import 'logo.dart';
 import 'navigation_home_screen.dart';
+import 'offer_navigation_home_screen.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized()는 runApp으로 앱이 실행되기 전에 비동기로 지연이 되더라도 오류가 발생하지 않도록 하는 역할을 한다.
@@ -34,19 +35,20 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
           title: 'REMIND DIARY',
-          debugShowCheckedModeBanner: false,
-          routes: {
-            '/home': (context) => const NavigationHomeScreen(),
-            '/login': (context) => LoginPage(),
-            '/splash': (context) => SplashScreen(),
-            '/register': (context) => RegisterPage(),
-          },
-          // theme: ThemeData(
-          //   primaryColor: Colors.white,
-          //   textTheme: AppTheme.textTheme,
-          //   platform: TargetPlatform.iOS,
-          // ),
-          initialRoute: '/splash'
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/clienthome': (context) => const NavigationHomeScreen(),
+          '/offerhome': (context) => const OfferNavigationHomeScreen(),
+          '/login': (context) => LoginPage(),
+          '/splash': (context) => SplashScreen(),
+          '/register': (context) => RegisterPage(),
+        },
+        // theme: ThemeData(
+        //   primaryColor: Colors.white,
+        //   textTheme: AppTheme.textTheme,
+        //   platform: TargetPlatform.iOS,
+        // ),
+        initialRoute: '/splash'
       ),
     );
   }

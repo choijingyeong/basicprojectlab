@@ -1,5 +1,6 @@
 // 참고 https://cholol.tistory.com/572
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'model_auth.dart';
@@ -112,8 +113,6 @@ class LoginButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0),
           ),
-          primary: Color.fromARGB(255, 14, 11, 1), // 배경색을 파란색으로 변경
-          onPrimary: Colors.white,
         ),
         onPressed: () async {
           await authClient
@@ -125,7 +124,16 @@ class LoginButton extends StatelessWidget {
                 ..showSnackBar(SnackBar(
                     content:
                     Text('welcome! ' + authClient.user!.email! + ' ')));
-              Navigator.pushReplacementNamed(context, '/home');
+              final userCollectionReference = FirebaseFirestore.instance.collection("users").doc(login.email);
+              userCollectionReference.get().then((role) => {
+                if (role.data()?['role'] == "내담자") {
+                  Navigator.pushReplacementNamed(context, '/clienthome')
+                } else if (role.data()?['role'] == "상담가") {
+                  Navigator.pushReplacementNamed(context, '/offerhome')
+                } else {
+                  print(role.data()?['role'])
+                }
+              });
             } else {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
