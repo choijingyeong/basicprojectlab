@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../app_theme.dart';
-import '../diary/diary.dart';
+import '../../app_theme.dart';
 import '../diary/diary_navigation.dart';
-import '../write_diary/write_diary.dart';
-import 'after_search.dart';
 
 class Tags extends StatefulWidget {
   const Tags({Key? key}) : super(key: key);

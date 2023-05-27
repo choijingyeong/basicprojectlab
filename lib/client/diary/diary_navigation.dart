@@ -1,12 +1,12 @@
-import 'package:reminddiary/tags/tags.dart';
-import 'package:reminddiary/userpage/user_page.dart';
+import '../tags/tags.dart';
+import '../userpage/user_page.dart';
 
-import '../app_theme.dart';
+import '../../app_theme.dart';
 import '../calendar/calendar.dart';
-import '../custom_drawer/drawer_user_controller.dart';
-import '../custom_drawer/home_drawer.dart';
+import '../client_custom_drawer/drawer_user_controller.dart';
+import '../client_custom_drawer/home_drawer.dart';
 import '../feelings/feelings.dart';
-import '../homepage/home_page.dart';
+import '../homepage/main_page.dart';
 import 'diary.dart';
 import 'package:flutter/material.dart';
 

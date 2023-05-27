@@ -1,23 +1,23 @@
-import 'package:reminddiary/tags/tags.dart';
-import 'package:reminddiary/userpage/user_page.dart';
+import 'tags/tags.dart';
+import 'userpage/user_page.dart';
 
-import 'app_theme.dart';
+import '../app_theme.dart';
 import 'calendar/calendar.dart';
-import 'custom_drawer/drawer_user_controller.dart';
-import 'custom_drawer/home_drawer.dart';
+import 'client_custom_drawer/drawer_user_controller.dart';
+import 'client_custom_drawer/home_drawer.dart';
 import 'feelings/feelings.dart';
-import 'homepage/home_page.dart';
+import 'homepage/main_page.dart';
 import 'package:flutter/material.dart';
 
 // 햄버거 메뉴 클릭 시 나옴
-class OfferNavigationHomeScreen extends StatefulWidget {
-  const OfferNavigationHomeScreen({super.key});
+class NavigationHomeScreen extends StatefulWidget {
+  const NavigationHomeScreen({super.key});
 
   @override
-  _OfferNavigationHomeScreenState createState() => _OfferNavigationHomeScreenState();
+  _NavigationHomeScreenState createState() => _NavigationHomeScreenState();
 }
 
-class _OfferNavigationHomeScreenState extends State<OfferNavigationHomeScreen> {
+class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
   // 변수명 뒤에 ?이 붙은것은 null이 될 수 있다는 의미
   Widget? screenView;
   DrawerIndex? drawerIndex;
@@ -32,27 +32,26 @@ class _OfferNavigationHomeScreenState extends State<OfferNavigationHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
-    //   Container(
-    //   color: AppTheme.white,
-    //   child: SafeArea(
-    //     top: false,
-    //     bottom: false,
-    //     child: Scaffold(
-    //       backgroundColor: AppTheme.nearlyWhite,
-    //       body: DrawerUserController(
-    //         screenIndex: drawerIndex,
-    //         drawerWidth: MediaQuery.of(context).size.width * 0.75,
-    //         onDrawerCall: (DrawerIndex drawerIndexdata) {
-    //           changeIndex(drawerIndexdata);
-    //           //callback from drawer for replace screen as user need with passing DrawerIndex(Enum index)
-    //         },
-    //         screenView: screenView,
-    //         //we replace screen view as we need on navigate starting screens like MyHomePage, HelpScreen, FeedbackScreen, etc...
-    //       ),
-    //     ),
-    //   ),
-    // );
+    return Container(
+      color: AppTheme.white,
+      child: SafeArea(
+        top: false,
+        bottom: false,
+        child: Scaffold(
+          backgroundColor: AppTheme.nearlyWhite,
+          body: DrawerUserController(
+            screenIndex: drawerIndex,
+            drawerWidth: MediaQuery.of(context).size.width * 0.75,
+            onDrawerCall: (DrawerIndex drawerIndexdata) {
+              changeIndex(drawerIndexdata);
+              //callback from drawer for replace screen as user need with passing DrawerIndex(Enum index)
+            },
+            screenView: screenView,
+            //we replace screen view as we need on navigate starting screens like MyHomePage, HelpScreen, FeedbackScreen, etc...
+          ),
+        ),
+      ),
+    );
   }
 
   void changeIndex(DrawerIndex drawerIndexdata) {

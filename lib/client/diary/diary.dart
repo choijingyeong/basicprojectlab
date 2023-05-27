@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import '../app_theme.dart';
+import '../../app_theme.dart';
 
 class Diary extends StatefulWidget {
   const Diary({Key? key}) : super(key: key);

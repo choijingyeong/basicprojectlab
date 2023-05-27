@@ -1,9 +1,9 @@
 import 'package:provider/provider.dart';
 
-import '../app_theme.dart';
+import '../../../app_theme.dart';
 import 'package:flutter/material.dart';
 
-import '../login/model_auth.dart';
+import '../../login/model_auth.dart';
 
 class HomeDrawer extends StatefulWidget {
   const HomeDrawer(

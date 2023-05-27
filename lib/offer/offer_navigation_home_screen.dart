@@ -1,23 +1,22 @@
-import 'package:reminddiary/tags/tags.dart';
-import 'package:reminddiary/userpage/user_page.dart';
-
-import 'app_theme.dart';
-import 'calendar/calendar.dart';
-import 'custom_drawer/drawer_user_controller.dart';
-import 'custom_drawer/home_drawer.dart';
-import 'feelings/feelings.dart';
-import 'homepage/home_page.dart';
 import 'package:flutter/material.dart';
 
+import '../app_theme.dart';
+import 'client_list/client_list.dart';
+import 'client_request/client_request.dart';
+import 'find_client/find_client.dart';
+import 'offer_custom_drawer/drawer_user_controller.dart';
+import 'offer_custom_drawer/home_drawer.dart';
+import 'offer_user_page/offer_user_page.dart';
+
 // 햄버거 메뉴 클릭 시 나옴
-class NavigationHomeScreen extends StatefulWidget {
-  const NavigationHomeScreen({super.key});
+class OfferNavigationHomeScreen extends StatefulWidget {
+  const OfferNavigationHomeScreen({super.key});
 
   @override
-  _NavigationHomeScreenState createState() => _NavigationHomeScreenState();
+  _OfferNavigationHomeScreenState createState() => _OfferNavigationHomeScreenState();
 }
 
-class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
+class _OfferNavigationHomeScreenState extends State<OfferNavigationHomeScreen> {
   // 변수명 뒤에 ?이 붙은것은 null이 될 수 있다는 의미
   Widget? screenView;
   DrawerIndex? drawerIndex;
@@ -26,7 +25,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
   @override
   void initState() {
     drawerIndex = DrawerIndex.HOME;
-    screenView = const MyHomePage();
+    screenView = const ClientList();
     super.initState();
   }
 
@@ -58,38 +57,31 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
     if (drawerIndex != drawerIndexdata) {
       drawerIndex = drawerIndexdata;
       switch (drawerIndex) {
-      // 첫 메인페이지 (피그마에서 2번페이지)
+      // 내담자 리스트
         case DrawerIndex.HOME:
           setState(() {
-            screenView = const MyHomePage();
+            screenView = const ClientList();
           });
           break;
-      // 달력 (피그마에서 4번페이지)
+      // 내담자 요청 리스트
         case DrawerIndex.Calendar:
           setState(() {
             // screenView = HelpScreen();
-            screenView = const Calendar();
+            screenView = const ClientRequest();
           });
           break;
-      // 감정별 모아보기 (피그마에서 3번 페이지)
+      // 내담자 찾기
         case DrawerIndex.Feelings:
           setState(() {
             // screenView = FeedbackScreen();
-            screenView = Feelings();
-          });
-          break;
-      // 태그별 모아보기 (피그마에서 5번 페이지)
-        case DrawerIndex.Tags:
-          setState(() {
-            // screenView = InviteFriend();
-            screenView = const Tags();
+            screenView = FindClient();
           });
           break;
       // 마이페이지 (피그마에서 8번 페이지)
         case DrawerIndex.User:
           setState(() {
             // screenView = InviteFriend();
-            screenView = const UserPage();
+            screenView = const OfferUserPage();
           });
           break;
         default:

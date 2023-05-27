@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-import '../app_theme.dart';
+import '../../app_theme.dart';
 
 final images = [
   'assets/images/milky.jpg',
