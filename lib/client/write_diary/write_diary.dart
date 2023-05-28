@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../module_diary.dart';
 import '../homepage/main_page.dart';
+import 'accessButton.dart';
 
 final images = [
   'images/movie1.png',
@@ -411,6 +412,7 @@ class _uploadNewPost extends State {
                                         color: Colors.black
                                     ),
                                   ),),
+                                accessButton()
                               ],
                             )
                         )
