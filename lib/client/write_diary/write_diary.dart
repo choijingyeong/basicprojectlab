@@ -148,7 +148,7 @@ class _uploadNewPost extends State {
     height: 200,
     alignment: Alignment.centerLeft,
     decoration: BoxDecoration(
-        shape: BoxShape.circle,
+      shape: BoxShape.circle,
       color: Colors.amberAccent,
     ),
   );
@@ -157,90 +157,90 @@ class _uploadNewPost extends State {
     showDialog(
         builder: (BuildContext context) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            title: Text(
-              "감정 변경하기",
-              style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
               ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  "적용",
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black
-                  ),
+              title: Text(
+                "감정 변경하기",
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black
                 ),
               ),
-              TextButton(
+              actions: [
+                TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "닫기",
+                    "적용",
                     style: TextStyle(
                         fontSize: 15,
                         color: Colors.black
                     ),
-                  ))
-            ],
-            content: Row(
-              children: [
-                TextButton(
-                    onPressed: () {
-                      emotionIndex = 0;
-                      emotion = "화남";
-                    },
-                    child: Text(
-                      "화남",
-                    )
+                  ),
                 ),
                 TextButton(
                     onPressed: () {
-                      emotionIndex = 1;
-                      emotion = "신남";
+                      Navigator.pop(context);
                     },
                     child: Text(
-                      "신남",
-                    )
-                ),
-                TextButton(
-                    onPressed: () {
-                      emotionIndex = 2;
-                      emotion = "기쁨";
-                    },
-                    child: Text(
-                      "기쁨",
-                    )
-                ),
-                TextButton(
-                    onPressed: () {
-                      emotion = "즐거움";
-                      emotionIndex = 3;
-                    },
-                    child: Text(
-                      "즐거움",
-                    )
-                ),
-                TextButton(
-                    onPressed: () {
-                      emotion = "슬픔";
-                      emotionIndex = 4;
-                    },
-                    child: Text(
-                      "슬픔",
-                    )
-                ),
+                      "닫기",
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black
+                      ),
+                    ))
               ],
-            )
+              content: Row(
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        emotionIndex = 0;
+                        emotion = "화남";
+                      },
+                      child: Text(
+                        "화남",
+                      )
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        emotionIndex = 1;
+                        emotion = "신남";
+                      },
+                      child: Text(
+                        "신남",
+                      )
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        emotionIndex = 2;
+                        emotion = "기쁨";
+                      },
+                      child: Text(
+                        "기쁨",
+                      )
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        emotion = "즐거움";
+                        emotionIndex = 3;
+                      },
+                      child: Text(
+                        "즐거움",
+                      )
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        emotion = "슬픔";
+                        emotionIndex = 4;
+                      },
+                      child: Text(
+                        "슬픔",
+                      )
+                  ),
+                ],
+              )
           );
         },
         context: this.context
@@ -252,130 +252,130 @@ class _uploadNewPost extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body : Container(
-          margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-          child: Column(
-            children: <Widget>[
-              Container(
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
-                          emotionCircle,
-                          Container(
-                              child: CarouselSlider(
-                                options: CarouselOptions(
-                                  height: 250.0,
-                                ),
-                                items: images.map((i) {
-                                  return Builder(
-                                    builder: (BuildContext context) {
-                                      return Container(
-                                        width: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width,
-                                        margin: EdgeInsets.fromLTRB(
-                                            10, 40, 10, 0),
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                blurRadius: 10.0,
-                                                spreadRadius: 2.0,
-                                              )
-                                            ]
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                              10.0),
-                                          child: Image.asset(
-                                            i,
-                                            fit: BoxFit.cover,
+        body : Container(
+            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            child: Column(
+              children: <Widget>[
+                Container(
+                    child: Column(
+                      children: [
+                        Stack(
+                          children: [
+                            emotionCircle,
+                            Container(
+                                child: CarouselSlider(
+                                  options: CarouselOptions(
+                                    height: 250.0,
+                                  ),
+                                  items: images.map((i) {
+                                    return Builder(
+                                      builder: (BuildContext context) {
+                                        return Container(
+                                          width: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .width,
+                                          margin: EdgeInsets.fromLTRB(
+                                              10, 40, 10, 0),
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  blurRadius: 10.0,
+                                                  spreadRadius: 2.0,
+                                                )
+                                              ]
                                           ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                }).toList(),
-                              )
-                          ),
-                        ],
-                      ),
-                      Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: tagList,
-                          )
-                      )
-                    ],
-                  )
-              ),
-              Expanded(
-                  child: Column(
-                    children: [
-                      Expanded(
-                          flex: 7,
-                          child: Container(
-                            padding: const EdgeInsets.fromLTRB(30, 40, 30, 40),
-                            child : TextField(
-                              keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: _writediarycontroller,
-                              style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.black
-                              ),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                                10.0),
+                                            child: Image.asset(
+                                              i,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  }).toList(),
+                                )
+                            ),
+                          ],
+                        ),
+                        Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: tagList,
                             )
-                          )
-                      ),
-                      Expanded(
-                          flex: 3,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              TextButton(
-                                  onPressed: () {
-                                    addTag();
-                                  },
+                        )
+                      ],
+                    )
+                ),
+                Expanded(
+                    child: Column(
+                      children: [
+                        Expanded(
+                            flex: 7,
+                            child: Container(
+                                padding: const EdgeInsets.fromLTRB(30, 40, 30, 40),
+                                child : TextField(
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  controller: _writediarycontroller,
+                                  style: const TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black
+                                  ),
+                                )
+                            )
+                        ),
+                        Expanded(
+                            flex: 3,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                TextButton(
+                                    onPressed: () {
+                                      addTag();
+                                    },
+                                    child: Text(
+                                      "태그추가",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.black
+                                      ),
+                                    )
+                                ),
+                                TextButton(
+                                  onPressed: () { selectEmotion(); },
                                   child: Text(
-                                    "태그추가",
+                                    "감정변경",
                                     style: TextStyle(
                                         fontSize: 15,
                                         color: Colors.black
                                     ),
-                                  )
-                              ),
-                              TextButton(
-                                onPressed: () { selectEmotion(); },
-                                child: Text(
-                                  "감정변경",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.black
-                                  ),
-                                ),),
-                              TextButton(
-                                onPressed: () {
-                                  _addDiary(Diary(_writediarycontroller.text, tags, emotion));
-                                  Navigator.push(context,MaterialPageRoute(builder: (context) => MyHomePage()));
+                                  ),),
+                                TextButton(
+                                  onPressed: () {
+                                    _addDiary(Diary(_writediarycontroller.text, tags, emotion));
+                                    Navigator.push(context,MaterialPageRoute(builder: (context) => MyHomePage()));
                                   },
-                                child: Text(
-                                  "저장",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.black
-                                  ),
-                                ),),
-                            ],
-                          )
-                      )
-                    ],
-                  )
-              )
-            ],
-          )
-      )
+                                  child: Text(
+                                    "저장",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.black
+                                    ),
+                                  ),),
+                              ],
+                            )
+                        )
+                      ],
+                    )
+                )
+              ],
+            )
+        )
     );
   }
 
@@ -388,4 +388,3 @@ class _uploadNewPost extends State {
     });
   }
 }
-
