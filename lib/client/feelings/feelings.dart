@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app_theme.dart';
+import 'diary_of_feelings/feeling_diary_navigation.dart';
 
 class Feelings extends StatefulWidget {
   const Feelings({Key? key}) : super(key: key);
@@ -41,7 +42,7 @@ class _FeelingsState extends State<Feelings> with TickerProviderStateMixin {
               final category = categoryList[index];
               return GestureDetector(
                 onTap: () {
-                  print('selected');
+                  Navigator.push(context,MaterialPageRoute(builder: (context) => FeelingDiaryNavigation(feeling: category.name)));
                 },
                 child: Row(
                   children: [
