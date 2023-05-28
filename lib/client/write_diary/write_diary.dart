@@ -5,32 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../module_diary.dart';
+import '../homepage/main_page.dart';
 
 final images = [
   'images/movie1.png',
   'images/movie2.png',
   'images/movie3.png',
 ];
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const WriteDiary(),
-    );
-  }
-}
 
 class WriteDiary extends StatefulWidget {
   const WriteDiary({super.key});
@@ -171,6 +152,7 @@ class _uploadNewPost extends State {
       color: Colors.amberAccent,
     ),
   );
+
   void selectEmotion() {
     showDialog(
         builder: (BuildContext context) {
@@ -272,11 +254,9 @@ class _uploadNewPost extends State {
     return Scaffold(
         body : Container(
             margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-            height: 300,
             child: Column(
               children: <Widget>[
-                Expanded(
-                    flex: 5,
+                Container(
                     child: Column(
                       children: [
                         Stack(
@@ -332,17 +312,21 @@ class _uploadNewPost extends State {
                     )
                 ),
                 Expanded(
-                    flex: 5,
                     child: Column(
                       children: [
                         Expanded(
                             flex: 7,
-                            child: TextField(
-                              controller: _writediarycontroller,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.black
-                              ),
+                            child: Container(
+                                padding: const EdgeInsets.fromLTRB(30, 40, 30, 40),
+                                child : TextField(
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  controller: _writediarycontroller,
+                                  style: const TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black
+                                  ),
+                                )
                             )
                         ),
                         Expanded(
@@ -372,7 +356,10 @@ class _uploadNewPost extends State {
                                     ),
                                   ),),
                                 TextButton(
-                                  onPressed: () => _addDiary(Diary(_writediarycontroller.text, tags, emotion)),
+                                  onPressed: () {
+                                    _addDiary(Diary(_writediarycontroller.text, tags, emotion));
+                                    Navigator.push(context,MaterialPageRoute(builder: (context) => MyHomePage()));
+                                  },
                                   child: Text(
                                     "저장",
                                     style: TextStyle(
@@ -381,7 +368,6 @@ class _uploadNewPost extends State {
                                     ),
                                   ),),
                               ],
-
                             )
                         )
                       ],
