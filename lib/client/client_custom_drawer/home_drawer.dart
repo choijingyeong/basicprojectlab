@@ -57,9 +57,9 @@ class _HomeDrawerState extends State<HomeDrawer> {
         icon: Icon(Icons.insights),
       ),
       DrawerList(
-        index: DrawerIndex.About,
-        labelName: 'About Us',
-        icon: Icon(Icons.info)
+        index: DrawerIndex.Homeworks,
+        labelName: '숙제 리스트',
+        icon: Icon(Icons.home_work)
       ),
     ];
   }
@@ -305,7 +305,7 @@ enum DrawerIndex {
   Feelings,
   Tags,
   User,
-  About,
+  Homeworks,
   Testing,
 }
 

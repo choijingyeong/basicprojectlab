@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../app_theme.dart';
+import '../client_info/client_info.dart';
 
 class ClientList extends StatefulWidget {
   const ClientList({Key? key}) : super(key: key);
@@ -12,7 +13,18 @@ class _ClientListState extends State<ClientList> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    throw UnimplementedError();
+    return TextButton(
+      onPressed: () {
+        Navigator.push(context,MaterialPageRoute(builder: (context) => ClientInfo()));
+      },
+      child: Text(
+        "상담가 정보로 넘어가기 >>",
+        style: TextStyle(
+            fontSize: 15,
+            color: Colors.black
+        ),
+      ),
+    );
   }
 
   Widget appBar() {
