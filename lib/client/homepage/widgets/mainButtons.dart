@@ -19,7 +19,8 @@ class _mainButton extends State{
               "모아보기",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 30
+                  fontSize: 25,
+                color: Colors.black
               ),
             ),
           ),
@@ -31,8 +32,8 @@ class _mainButton extends State{
                 TextButton(
                     onPressed: () {}, ////////////날짜별 버튼/////////////////////////////////////////////////
                     child: Container(
-                      width: 150,
-                      height: 180,
+                      width: 140,
+                      height: 160,
                       decoration: BoxDecoration(
                           color: Color.fromRGBO(244, 245, 233, 1),
                           borderRadius: BorderRadius.circular(20),
@@ -72,8 +73,8 @@ class _mainButton extends State{
                 TextButton(
                   onPressed: () {}, ////////////////태그별 버튼/////////////////////////////////////////
                   child: Container(
-                    width: 150,
-                    height: 180,
+                    width: 140,
+                    height: 160,
                     decoration: BoxDecoration(
                         color: Color.fromRGBO(244, 245, 233, 1),
                         borderRadius: BorderRadius.circular(20),
@@ -113,8 +114,8 @@ class _mainButton extends State{
                 TextButton(
                   onPressed: () {}, /////////////////감정별버튼//////////////////////////////////////////
                   child: Container(
-                    width: 150,
-                    height: 180,
+                    width: 140,
+                    height: 160,
                     decoration: BoxDecoration(
                         color: Color.fromRGBO(244, 245, 233, 1),
                         borderRadius: BorderRadius.circular(20),
