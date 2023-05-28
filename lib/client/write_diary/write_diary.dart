@@ -6,12 +6,34 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../module_diary.dart';
 import '../homepage/main_page.dart';
+import 'accessButton.dart';
 
 final images = [
   'images/movie1.png',
   'images/movie2.png',
   'images/movie3.png',
 ];
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
 
 class WriteDiary extends StatefulWidget {
   const WriteDiary({super.key});
@@ -169,18 +191,6 @@ class _uploadNewPost extends State {
               ),
               actions: [
                 TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    "적용",
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black
-                    ),
-                  ),
-                ),
-                TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -198,6 +208,7 @@ class _uploadNewPost extends State {
                       onPressed: () {
                         emotionIndex = 0;
                         emotion = "화남";
+                        Navigator.pop(context);
                       },
                       child: Text(
                         "화남",
@@ -207,6 +218,7 @@ class _uploadNewPost extends State {
                       onPressed: () {
                         emotionIndex = 1;
                         emotion = "신남";
+                        Navigator.pop(context);
                       },
                       child: Text(
                         "신남",
@@ -216,6 +228,7 @@ class _uploadNewPost extends State {
                       onPressed: () {
                         emotionIndex = 2;
                         emotion = "기쁨";
+                        Navigator.pop(context);
                       },
                       child: Text(
                         "기쁨",
@@ -225,6 +238,7 @@ class _uploadNewPost extends State {
                       onPressed: () {
                         emotion = "즐거움";
                         emotionIndex = 3;
+                        Navigator.pop(context);
                       },
                       child: Text(
                         "즐거움",
@@ -234,6 +248,7 @@ class _uploadNewPost extends State {
                       onPressed: () {
                         emotion = "슬픔";
                         emotionIndex = 4;
+                        Navigator.pop(context);
                       },
                       child: Text(
                         "슬픔",
@@ -261,7 +276,15 @@ class _uploadNewPost extends State {
                       children: [
                         Stack(
                           children: [
-                            emotionCircle,
+                            Container(
+                              width: double.infinity,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  emotionCircle
+                                ],
+                              ),
+                            ),
                             Container(
                                 child: CarouselSlider(
                                   options: CarouselOptions(
@@ -316,17 +339,39 @@ class _uploadNewPost extends State {
                       children: [
                         Expanded(
                             flex: 7,
-                            child: Container(
-                                padding: const EdgeInsets.fromLTRB(30, 40, 30, 40),
-                                child : TextField(
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: null,
-                                  controller: _writediarycontroller,
-                                  style: const TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.black
-                                  ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "23.05.26",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ),
+                                Container(
+                                    padding: const EdgeInsets.fromLTRB(30, 40, 30, 40),
+                                    child : TextField(
+                                      decoration: InputDecoration(
+                                          border: InputBorder.none
+                                      ),
+                                      keyboardType: TextInputType.multiline,
+                                      maxLines: 8,
+                                      controller: _writediarycontroller,
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.black
+                                      ),
+                                    )
                                 )
+                              ],
                             )
                         ),
                         Expanded(
@@ -367,6 +412,7 @@ class _uploadNewPost extends State {
                                         color: Colors.black
                                     ),
                                   ),),
+                                accessButton()
                               ],
                             )
                         )
