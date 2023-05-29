@@ -1,39 +1,22 @@
+
+import 'dart:io';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../module_diary.dart';
-import '../homepage/main_page.dart';
+import '../navigation_home_screen.dart';
 import 'accessButton.dart';
 
-final images = [
-  'images/movie1.png',
-  'images/movie2.png',
-  'images/movie3.png',
-];
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
-    );
-  }
-}
+// final images = [
+//   'images/movie1.png',
+//   'images/movie2.png',
+//   'images/movie3.png',
+// ];
 
 class WriteDiary extends StatefulWidget {
   const WriteDiary({super.key});
@@ -42,77 +25,15 @@ class WriteDiary extends StatefulWidget {
   State createState() => _uploadNewPost();
 }
 
-class staticVariables extends ChangeNotifier {
-  List<Widget> _tagList = [];
-
-  void addText(String txt) {
-    _tagList.add(
-        Container(
-          padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
-          margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(
-                  5)),
-              color: Colors.grey
-          ),
-          child: Text(
-            "#"+txt,
-            style: TextStyle(
-                fontSize: 10,
-                color: Colors.white
-            ),
-          ),
-        )
-    );
-  }
-}
-
-
 class _uploadNewPost extends State {
   final tagText = TextEditingController();
-  List<Widget> tagList = [
-    Container(
-      padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
-      margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(
-              5)),
-          color: Colors.grey
-      ),
-      child: const Text(
-        '#성년의 날',
-        style: TextStyle(
-            fontSize: 10,
-            color: Colors.white
-        ),
-      ),
-    ),
-    Container(
-      padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
-      margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          color: Colors.grey
-      ),
-      child: Text(
-        "#영화제",
-        style: const TextStyle(
-            fontSize: 10,
-            color: Colors.white
-        ),
-      ),
-    )
-  ];
 
   String? getEmail(){
     final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      final email = user.email;
-      return email;
-    }
-    return "";
+    return user?.email;
   }
 
+  List<String> tags = ["성년의 날", "영화제"];
   void addTag() {
     showDialog(
         builder: (BuildContext context) {
@@ -130,6 +51,9 @@ class _uploadNewPost extends State {
             actions: [
               TextButton(
                 onPressed: () {
+                  setState(() {
+                    tags.add(tagText.text);
+                  });
                   Navigator.pop(context);
                 },
                 child: Text(
@@ -161,7 +85,6 @@ class _uploadNewPost extends State {
     );
   }
 
-  List<String> tags = ["성년의 날", "영화제"];
   String emotion = "";
   int emotionIndex = 0;
   List emotionArr = [Colors.red, Colors.orange, Colors.yellow, Colors.lightGreenAccent, Colors.lightBlueAccent];
@@ -264,6 +187,21 @@ class _uploadNewPost extends State {
 
   TextEditingController _writediarycontroller = TextEditingController();
 
+  final ImagePicker _picker = ImagePicker();
+  List<String> _pickedImgs = [];
+
+  Future _pickImg() async {
+    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        _pickedImgs.add(image.path);
+      });
+    }
+  }
+
+  DateTime? _selectedDate;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -289,8 +227,9 @@ class _uploadNewPost extends State {
                                 child: CarouselSlider(
                                   options: CarouselOptions(
                                     height: 250.0,
+                                    enableInfiniteScroll: false,
                                   ),
-                                  items: images.map((i) {
+                                  items: _pickedImgs.map((i) {
                                     return Builder(
                                       builder: (BuildContext context) {
                                         return Container(
@@ -309,14 +248,16 @@ class _uploadNewPost extends State {
                                                 )
                                               ]
                                           ),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                                10.0),
-                                            child: Image.asset(
-                                              i,
-                                              fit: BoxFit.cover,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(
+                                                  10.0),
+                                              image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: FileImage(File(i))
+                                              )
                                             ),
-                                          ),
+                                          )
                                         );
                                       },
                                     );
@@ -325,10 +266,53 @@ class _uploadNewPost extends State {
                             ),
                           ],
                         ),
+                        // Container(
+                        //   child: Row(
+                        //     children: [
+                        //       SizedBox(
+                        //         height:20,
+                        //         child: ListView.builder(
+                        //             shrinkWrap: true,
+                        //             scrollDirection: Axis.horizontal,
+                        //             itemCount: 5,
+                        //             itemBuilder: (context, index) {
+                        //               return Text(index.toString());
+                        //             }),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // )
                         Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: tagList,
+                          margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height:40,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: tags.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
+                                      margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
+                                      decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.all(Radius.circular(
+                                              5)),
+                                          color: Colors.grey
+                                      ),
+                                      child: Text(
+                                        '# ${tags[index]}',
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.white
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),)
+                              ]
                             )
                         )
                       ],
@@ -346,13 +330,29 @@ class _uploadNewPost extends State {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        "23.05.26",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 15
-                                        ),
-                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          showDatePicker(
+                                              context: context,
+                                              initialDate: DateTime.now(),
+                                              firstDate: DateTime(2000),
+                                              lastDate: DateTime(2100)
+                                          ).then((selectedDate) {
+                                            setState(() {
+                                              _selectedDate = selectedDate;
+                                            });
+                                          });
+                                        },
+                                        child: Text(
+                                          _selectedDate != null
+                                              ? _selectedDate.toString().split(" ")[0]
+                                              : "날짜 선택",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.black
+                                          ),
+                                        )
+                                    ),
                                     ],
                                   )
                                 ),
@@ -376,43 +376,62 @@ class _uploadNewPost extends State {
                         ),
                         Expanded(
                             flex: 3,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                TextButton(
-                                    onPressed: () {
-                                      addTag();
-                                    },
+                            child: Column(
+                              children: [Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  TextButton(
+                                      onPressed: () {
+                                        addTag();
+                                      },
+                                      child: Text(
+                                        "태그추가",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.black
+                                        ),
+                                      )
+                                  ),
+                                  TextButton(
+                                    onPressed: () { selectEmotion(); },
                                     child: Text(
-                                      "태그추가",
+                                      "감정변경",
                                       style: TextStyle(
                                           fontSize: 15,
                                           color: Colors.black
                                       ),
-                                    )
-                                ),
-                                TextButton(
-                                  onPressed: () { selectEmotion(); },
-                                  child: Text(
-                                    "감정변경",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.black
-                                    ),
-                                  ),),
-                                TextButton(
-                                  onPressed: () {
-                                    _addDiary(Diary(_writediarycontroller.text, tags, emotion));
-                                    Navigator.push(context,MaterialPageRoute(builder: (context) => MyHomePage()));
-                                  },
-                                  child: Text(
-                                    "저장",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.black
-                                    ),
-                                  ),),
-                                accessButton()
+                                    ),),
+                                  TextButton(
+                                    onPressed: () {
+                                      _pickImg();
+                                    },
+                                    child: Text(
+                                      "사진 추가",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.black
+                                      ),
+                                    ),),
+                                ],
+                              ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        _addDiary(Diary(contents: _writediarycontroller.text, tags: tags, feeling: emotion, imageUrl: _pickedImgs));
+                                        Navigator.push(context,MaterialPageRoute(builder: (context) => NavigationHomeScreen()));
+                                      },
+                                      child: Text(
+                                        "저장",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.black
+                                        ),
+                                      ),),
+                                    accessButton()
+                                  ],
+                                )
                               ],
                             )
                         )
@@ -429,7 +448,7 @@ class _uploadNewPost extends State {
     setState(() {
       FirebaseFirestore.instance
           .collection(getEmail()!)
-          .add({'contents': diary.contents, 'tags': diary.tags, 'feeling' : diary.feeling});
+          .add({'contents': diary.contents, 'tags': diary.tags, 'feeling' : diary.feeling, 'imageUrl': diary.imageUrl});
       _writediarycontroller.text = "";
     });
   }

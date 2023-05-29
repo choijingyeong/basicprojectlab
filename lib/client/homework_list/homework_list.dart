@@ -1,40 +1,33 @@
 import 'package:flutter/material.dart';
 
+import '../../app_theme.dart';
+
 class HomeworkList extends StatelessWidget {
   final List<ButtonData> buttons = [
     ButtonData(
-      title: 'Button 1',
+      title: '일기 하루에 하나씩 쓰기',
+      dateText: '2023. 12. 10 ~ 2023. 12. 20',
+      isChecked: true,
+    ),
+    ButtonData(
+      title: '일기 하루에 하나씩 쓰기',
       dateText: '2023. 12. 17 ~ 2023. 12. 25',
       isChecked: true,
     ),
     ButtonData(
-      title: 'Button 2',
+      title: '이틀에 하나씩 일기 쓰기',
       dateText: '2023. 12. 27 ~ 2023. 12. 31',
       isChecked: false,
-    ),
-    ButtonData(
-      title: 'Button 3',
-      dateText: '2023. 12. 10 ~ 2023. 12. 20',
-      isChecked: true,
     ),
     // 다른 버튼들도 추가할 수 있습니다.
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Scrollable Buttons'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              // 메뉴 버튼을 눌렀을 때 수행할 동작
-            },
-          ),
-        ],
-      ),
-      body: ListView.builder(
+    return Column(
+        children: [
+        appBar(),
+        ListView.builder(
         itemCount: buttons.length,
         itemBuilder: (context, index) {
           return ListTile(
@@ -48,6 +41,37 @@ class HomeworkList extends StatelessWidget {
             },
           );
         },
+      ),
+    ]);
+  }
+
+  Widget appBar() {
+    return SizedBox(
+      height: AppBar().preferredSize.height,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 8, left: 8),
+            child: Container(
+              width: AppBar().preferredSize.height - 8,
+              height: AppBar().preferredSize.height - 8,
+            ),
+          ),
+          const Expanded(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+              child: Text(
+                'Remind Diary',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: AppTheme.white,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

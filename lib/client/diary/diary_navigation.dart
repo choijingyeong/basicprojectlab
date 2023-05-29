@@ -1,3 +1,4 @@
+import '../homework_list/homework_list.dart';
 import '../tags/tags.dart';
 import '../userpage/user_page.dart';
 
@@ -84,6 +85,13 @@ class _DiaryNavigationState extends State<DiaryNavigation> {
           setState(() {
             // screenView = InviteFriend();
             screenView = const Tags();
+          });
+          break;
+      // 숙제 모아보기 (피그마에서 8번 페이지)
+        case DrawerIndex.Homeworks:
+          setState(() {
+            // screenView = InviteFriend();
+            screenView = HomeworkList();
           });
           break;
       // 마이페이지 (피그마에서 8번 페이지)
