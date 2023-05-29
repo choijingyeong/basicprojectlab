@@ -17,7 +17,7 @@ class AppTheme {
   static const Color dismissibleBackground = Color(0xFF364A54);
   static const Color chipBackground = Color(0xFFEEF1F3);
   static const Color spacer = Color(0xFFF2F2F2);
-  static const String fontName = 'WorkSans';
+  static const String fontName = 'Nunito_SemiBold';
 
   static const TextTheme textTheme = TextTheme(
     headline4: display1,
@@ -84,6 +84,20 @@ class AppTheme {
     fontSize: 12,
     letterSpacing: 0.2,
     color: lightText, // was lightText
+  );
+
+  static const TextStyle tag = TextStyle(
+      fontWeight: FontWeight.w400,
+      fontSize: 12,
+      letterSpacing: 0.2,
+      color: Colors.white
+  );
+
+  static const TextStyle textbuttons = TextStyle(
+      fontWeight: FontWeight.w800,
+      fontSize: 15,
+      letterSpacing: 0.2,
+      color: Colors.black
   );
 
 }

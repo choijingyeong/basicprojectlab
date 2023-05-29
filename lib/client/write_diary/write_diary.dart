@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../app_theme.dart';
 import '../../module_diary.dart';
 import '../navigation_home_screen.dart';
 import 'accessButton.dart';
@@ -33,7 +34,7 @@ class _uploadNewPost extends State {
     return user?.email;
   }
 
-  List<String> tags = ["성년의 날", "영화제"];
+  List<String> tags = [];
   void addTag() {
     showDialog(
         builder: (BuildContext context) {
@@ -266,22 +267,6 @@ class _uploadNewPost extends State {
                             ),
                           ],
                         ),
-                        // Container(
-                        //   child: Row(
-                        //     children: [
-                        //       SizedBox(
-                        //         height:20,
-                        //         child: ListView.builder(
-                        //             shrinkWrap: true,
-                        //             scrollDirection: Axis.horizontal,
-                        //             itemCount: 5,
-                        //             itemBuilder: (context, index) {
-                        //               return Text(index.toString());
-                        //             }),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // )
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                           child: Row(
@@ -304,10 +289,7 @@ class _uploadNewPost extends State {
                                       ),
                                       child: Text(
                                         '# ${tags[index]}',
-                                        style: TextStyle(
-                                            fontSize: 10,
-                                            color: Colors.white
-                                        ),
+                                        style: AppTheme.textbuttons
                                       ),
                                     );
                                   },
@@ -347,10 +329,7 @@ class _uploadNewPost extends State {
                                           _selectedDate != null
                                               ? _selectedDate.toString().split(" ")[0]
                                               : "날짜 선택",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.black
-                                          ),
+                                          style: AppTheme.textbuttons
                                         )
                                     ),
                                     ],
@@ -386,20 +365,14 @@ class _uploadNewPost extends State {
                                       },
                                       child: Text(
                                         "태그추가",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.black
-                                        ),
+                                        style: AppTheme.textbuttons
                                       )
                                   ),
                                   TextButton(
                                     onPressed: () { selectEmotion(); },
                                     child: Text(
                                       "감정변경",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.black
-                                      ),
+                                      style: AppTheme.textbuttons
                                     ),),
                                   TextButton(
                                     onPressed: () {
@@ -407,13 +380,11 @@ class _uploadNewPost extends State {
                                     },
                                     child: Text(
                                       "사진 추가",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.black
-                                      ),
+                                      style: AppTheme.textbuttons
                                     ),),
                                 ],
                               ),
+                                SizedBox(height:20),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
@@ -424,10 +395,7 @@ class _uploadNewPost extends State {
                                       },
                                       child: Text(
                                         "저장",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.black
-                                        ),
+                                        style: AppTheme.textbuttons
                                       ),),
                                     accessButton()
                                   ],
