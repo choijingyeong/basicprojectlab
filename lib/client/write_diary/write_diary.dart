@@ -342,7 +342,7 @@ class _uploadNewPost extends State {
                                           border: InputBorder.none
                                       ),
                                       keyboardType: TextInputType.multiline,
-                                      maxLines: 8,
+                                      maxLines: 5,
                                       controller: _writediarycontroller,
                                       style: const TextStyle(
                                           fontSize: 15,
